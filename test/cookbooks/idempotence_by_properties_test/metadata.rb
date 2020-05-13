@@ -1,0 +1,11 @@
+name 'idempotence_by_properties_test'
+maintainer 'Alex Munoz'
+maintainer_email 'amunoz951@gmail.com'
+license 'Apache-2.0'
+description 'Tests idempotence_by_properties cookbook'
+version '0.2.0'
+source_url 'https://github.com/amunoz951/idempotence_by_properties'
+issues_url 'https://github.com/amunoz951/idempotence_by_properties/issues'
+chef_version '>= 12'
+
+depends 'idempotence_by_properties'

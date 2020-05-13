@@ -1,0 +1,12 @@
+name 'idempotence_by_properties'
+maintainer 'Alex Munoz'
+maintainer_email 'amunoz951@gmail.com'
+license 'Apache-2.0'
+description 'Provides idempotent resources for property states that cannot be loaded/detected, such as passwords'
+source_url 'https://github.com/amunoz951/idempotence_by_properties'
+issues_url 'https://github.com/amunoz951/idempotence_by_properties/issues'
+chef_version '>= 12'
+version '0.1.0'
+
+supports 'windows'
+supports 'centos'
