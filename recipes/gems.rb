@@ -7,8 +7,12 @@
 #
 
 required_gems = {
-  'hashly' => '~> 0.1',
-  'easy_json_config' => '~> 0.3',
+  'os' => '~> 1.1',
+  'hashly' => '~> 0.1', # dependency of easy_json_config
+  'easy_json_config' => '~> 0.3', # dependency of easy_io
+  'logger' => '~> 1.4', # dependency of easy_io
+  'open3' => '~> 0.1', # dependency of easy_io
+  'easy_format' => '~> 0.2', # dependency of easy_io
   'easy_io' => '~> 0.4',
   'easy_state' => '~> 0.1',
 }
