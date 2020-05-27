@@ -1,6 +1,6 @@
 # idempotence_by_properties Cookbook
 
-[![Cookbook Version](https://img.shields.io/badge/cookbook-0.1.2-green.svg)](https://supermarket.chef.io/cookbooks/idempotence_by_properties)
+[![Cookbook Version](https://img.shields.io/badge/cookbook-0.1.3-green.svg)](https://supermarket.chef.io/cookbooks/idempotence_by_properties)
 
 Provides idempotent resources for property states that cannot be loaded/detected, such as passwords.
 
