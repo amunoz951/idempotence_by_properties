@@ -43,7 +43,7 @@ action :create do
   state_path.sub!("#{new_resource.cookbook_name}/#{new_resource.cookbook_name}", new_resource.cookbook_name) # Remove duplicate key
 
   # Get desired and previous states
-  previous_properties_state = lookup_state(state_path, state_type: new_resource.state_type)
+  previous_properties_state = IdempotenceByProperties::Helper.lookup_state(state_path, state_type: new_resource.state_type)
   new_properties_state = EasyState.hash_state(properties_to_check) # Get state by property for more granular data
 
   # Determine idempotency
@@ -62,7 +62,7 @@ action :create do
   # If nothing has changed, save the state to the run_state and exit the resource "Up to date".
   # At the end of the run, the handler will save all states if any have changed. This ensures that stale states don't pile up.
   unless update_target_resource
-    save_to_run_state(state_path, new_properties_state, new_resource.state_type)
+    IdempotenceByProperties::Helper.save_to_run_state(state_path, new_properties_state, new_resource.state_type)
     return
   end
 

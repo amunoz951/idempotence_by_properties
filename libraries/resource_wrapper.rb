@@ -6,7 +6,7 @@ module IdempotenceByProperties
 
       # Defaults
       idempotent_properties ||= []
-      state_type ||= :attribute
+      state_type ||= :attribute # TODO: Add :data_bag state_type as default
       current_loaded_values ||= {}
       excluded_properties ||= []
 
@@ -27,7 +27,7 @@ module IdempotenceByProperties
 
       # Get desired and previous states
       desired_properties_state = EasyState.hash_state(properties_to_check) # Get state by property for more granular data
-      previous_properties_state = lookup_state(state_path, state_type: state_type)
+      previous_properties_state = IdempotenceByProperties::Helper.lookup_state(state_path, state_type: state_type)
 
       # Determine idempotency
       changed_properties = EasyState.changed_keys(previous_properties_state, desired_properties_state)
@@ -38,7 +38,7 @@ module IdempotenceByProperties
       # If nothing has changed, save the state to the run_state and prevent a resource update (Show as "Up to date").
       # At the end of the run, the handler will save all states if any have changed. This ensures that stale states don't pile up.
       unless update_target_resource
-        save_to_run_state(state_path, desired_properties_state, state_type)
+        IdempotenceByProperties::Helper.save_to_run_state(state_path, desired_properties_state, state_type)
         target_resource.not_if { true } # Don't update the resource
         return
       end

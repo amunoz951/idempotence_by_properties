@@ -12,7 +12,7 @@ state_content = nil
 
 load_current_value do |desired_resource|
   raise "#{desired_resource.state_type} is not a supported state_type!" unless [:attribute, :file].include?(desired_resource.state_type)
-  previous_state_content = lookup_state(desired_resource.state_path, state_type: desired_resource.state_type)
+  previous_state_content = IdempotenceByProperties::Helper.lookup_state(desired_resource.state_path, state_type: desired_resource.state_type)
   state_content = desired_resource.take_checksum ? EasyState.object_state(desired_resource.state) : desired_resource.state
   state state_content == previous_state_content ? desired_resource.state : { state_changed: true }
   state_type desired_resource.state_type # Don't need to know if storage type changed
@@ -23,14 +23,14 @@ action :save do
 
   # Save the state to the run_state. At the end of the run, the handler will save all states
   # collected this run to a node.normal attribute. This ensures that stale states don't pile up.
-  save_to_run_state(new_resource.state_path, new_resource.state, new_resource.state_type)
+  IdempotenceByProperties::Helper.save_to_run_state(new_resource.state_path, new_resource.state, new_resource.state_type)
 
   converge_if_changed do
     case new_resource.state_type
     when :attribute
       break # No action needed. State was already saved to the run_state.
     when :file
-      save_file_state(new_resource.state_path, state_content)
+      IdempotenceByProperties::Helper.save_file_state(new_resource.state_path, state_content)
     end
   end
 end

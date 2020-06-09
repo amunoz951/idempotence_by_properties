@@ -2,6 +2,8 @@ require 'json'
 
 module IdempotenceByProperties
   module Helper
+    module_function
+
     def lookup_state(state_path, state_type: nil)
       state_type ||= :attribute
       return lookup_attribute_state(state_path) if state_type == :attribute
@@ -36,9 +38,7 @@ module IdempotenceByProperties
       node.run_state['idempotence_by_properties']['states'][state_type.to_s] = state_hash
     end
 
-    def self.save_all_states
-      node = Chef.run_context.node
-
+    def save_all_states
       # Save the run_states based on their state_type key
       node.run_state['idempotence_by_properties']['states'].each do |state_type, state_hash|
         case state_type
@@ -57,11 +57,12 @@ module IdempotenceByProperties
       end
     end
 
-    def self.state_by_file_changed?
+    def state_by_file_changed?
       @state_by_file_changed
+    end
+
+    def node
+      Chef.run_context.node
     end
   end
 end
-
-Chef::Resource.send(:include, IdempotenceByProperties::Helper)
-Chef::Provider.send(:include, IdempotenceByProperties::Helper)
