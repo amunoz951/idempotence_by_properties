@@ -8,7 +8,7 @@
 
 required_gems = {
   'os' => '1.1.0',
-  'hashly' => '0.1.0', # dependency of easy_json_config
+  'hashly' => '0.1.3', # dependency of easy_json_config
   'easy_json_config' => '0.3.0', # dependency of easy_io
   'logger' => '1.4.2', # dependency of easy_io
   'open3' => '0.1.0', # dependency of easy_io
