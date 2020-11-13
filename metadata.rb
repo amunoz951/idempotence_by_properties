@@ -6,7 +6,7 @@ description 'Provides idempotent resources for property states that cannot be lo
 source_url 'https://github.com/amunoz951/idempotence_by_properties'
 issues_url 'https://github.com/amunoz951/idempotence_by_properties/issues'
 chef_version '>= 12'
-version '0.1.4'
+version '0.1.5'
 
 supports 'windows'
 supports 'centos'
