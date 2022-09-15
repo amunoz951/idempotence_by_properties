@@ -3,7 +3,8 @@
 #   This is particularly useful for sensitive properties like passwords that cannot be compared with an existing value.
 # Caveats:
 #   Cannot natively tell if something was changed outside of Chef. Use the `or_if` guard to load available property values and trigger an update if changed.
-resource_name :idempotence_by_properties_resource
+provides :idempotence_by_properties_resource
+unified_mode true if respond_to?(:unified_mode)
 
 ### Special guard added for this resource!
 #   The `or_if` guard functions just like nof_if/only_if, except that it relates to the property states.

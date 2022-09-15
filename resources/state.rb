@@ -1,9 +1,10 @@
-resource_name :idempotence_by_properties_state
+provides :idempotence_by_properties_state
+unified_mode true if respond_to?(:unified_mode)
 
 # Common properties
 property :state_path, String, name_property: true # A path separated by forward slashes specifying where to store the state, much like Hashicorp Vault paths. It is NOT a filesystem path - EG: 'myproject/environment/sql_credentials'
 property :state, [Hash, Array, String], required: true # A hash, array, or string with data or checksums to be saved.
-property :take_checksum, [TrueClass, FalseClass], default: false # If true, uses a checksum of the object provided in the state property instead of saving the value
+property :take_checksum, [true, false], default: false # If true, uses a checksum of the object provided in the state property instead of saving the value
 property :state_type, Symbol, default: :attribute # Stores the states as attributes. Use :file to save them to a file instead (Saves state on successful resource completion as opposed to after successful chef-client converge like :attribute)
 
 default_action :save

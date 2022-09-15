@@ -14,7 +14,7 @@ end
 # Test the resource implementation
 idempotence_by_properties_resource 'This is a resource test' do
   type :execute
-  resource_properties ({
-    command: 'echo This is a resource test message.'
+  resource_properties({
+    command: 'echo This is a resource test message.',
   })
 end

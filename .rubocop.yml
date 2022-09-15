@@ -2,3 +2,5 @@ Layout/EndOfLine:
     Enabled: false
 Metrics/ParameterLists:
     CountKeywordArgs: false
+Chef/Correctness/NodeNormal:
+    Enabled: false

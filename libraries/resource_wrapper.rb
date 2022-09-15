@@ -31,7 +31,7 @@ module IdempotenceByProperties
 
       # Determine idempotency
       changed_properties = EasyState.changed_keys(previous_properties_state, desired_properties_state)
-      changed_properties.keys.each { |changed_property| Chef::Log.info "Property :#{changed_property} has changed..." }
+      changed_properties.each_key { |changed_property| Chef::Log.info "Property :#{changed_property} has changed..." }
       changed_desired_values = Hashly.deep_diff(properties_to_check, current_loaded_values)
       update_target_resource = target_resource.or_if_continue? || !changed_properties.empty? || !changed_desired_values.empty?
 
@@ -55,5 +55,5 @@ module IdempotenceByProperties
 end
 
 Chef::Resource.send(:include, IdempotenceByProperties::ResourceWrapper)
-Chef::Provider.send(:include, IdempotenceByProperties::ResourceWrapper)
-Chef::Recipe.send(:include, IdempotenceByProperties::ResourceWrapper)
+Chef::DSL::Recipe.send(:include, IdempotenceByProperties::ResourceWrapper)
+Chef::DSL::Recipe.send(:include, IdempotenceByProperties::ResourceWrapper)
